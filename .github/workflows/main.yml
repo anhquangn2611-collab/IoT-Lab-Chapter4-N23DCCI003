@@ -1,0 +1,19 @@
+name: IoT Lab CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install psutil matplotlib
+      - name: Check syntax and files
+        run: |
+          ls -R
+          python3 -m py_compile BT1_QEMU_SystemMonitor/*.py
+          python3 -m py_compile BT2_QEMU_SensorSim/*.py
+          python3 -m py_compile BT4_SenseHAT/*.py
